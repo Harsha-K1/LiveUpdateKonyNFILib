@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dotted/dashed remainder of the route: a tiled dash bitmap tinted with the accent colour -->
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/liveupdate_dash_tile"
+    android:tileModeX="repeat"
+    android:tint="@color/liveupdate_accent" />

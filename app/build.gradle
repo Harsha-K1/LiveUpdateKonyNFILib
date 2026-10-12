@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    namespace 'com.metrash.liveupdate'
+    compileSdk 36
+
+    android.libraryVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFileName = "LiveUpdateNFILib.aar"
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion 25
+        consumerProguardFiles 'consumer-rules.pro'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.core:core:1.12.0'
+    // Only what you actually reference; the app already provides these at runtime
+    compileOnly files('aars/konywidgets.jar')   // keep only if you subclass VoltMX's push service
+    compileOnly 'androidx.core:core:1.12.0'
+    compileOnly 'androidx.appcompat:appcompat:1.6.1'   // KonyMain extends AppCompatActivity (host provides it)
+    // Not referenced by LiveUpdateManager; re-enable with a real version if you add push handling
+    // compileOnly 'com.google.firebase:firebase-messaging:<match the version in the app>'
+}
+// After every release build, copy the AAR into the VoltMX project's native libs folder.
+// Override the destination with -PvoltmxLibDir=/other/path
+def voltmxLibDir = project.findProperty('voltmxLibDir') ?:
+        '/Users/harsha_k/workStuff/VoltMX/VOLTMX_WS_OCT_25/Metrash2Services/resources/customlibs/lib/android'
+
+tasks.register('copyAarToVoltMX', Copy) {
+    from layout.buildDirectory.file('outputs/aar/LiveUpdateNFILib.aar')
+    into voltmxLibDir
+    doFirst { println "Copying LiveUpdateNFILib.aar -> ${voltmxLibDir}" }
+}
+
+afterEvaluate {
+    tasks.named('assembleRelease') { finalizedBy 'copyAarToVoltMX' }
+}

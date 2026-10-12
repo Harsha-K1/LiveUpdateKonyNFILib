@@ -1,0 +1,2480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pre-Android 16 trip card: dashed route with boat | Departure ... Arrival.
+     RemoteViews can't set a view's position by fraction, so there is one pre-positioned boat row per
+     2% step (weighted spacers keep it proportional to the real width); the code shows just one boat row and the matching line row. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start|bottom"
+                android:src="@drawable/liveupdate_ic_endpoint" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/liveupdate_ic_endpoint" />
+
+            <!-- route at 0%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_0"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="100"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 2%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="98"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 4%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="96"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 6%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_6"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="6"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="94"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 8%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_8"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="8"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="92"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 10%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_10"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="90"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 12%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_12"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="12"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="88"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 14%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_14"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="14"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="86"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 16%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_16"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="16"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="84"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 18%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_18"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="18"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="82"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 20%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_20"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="20"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="80"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 22%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_22"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="22"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="78"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 24%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_24"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="24"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="76"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 26%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_26"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="26"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="74"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 28%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_28"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="28"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="72"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 30%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_30"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="30"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="70"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 32%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_32"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="32"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="68"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 34%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_34"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="34"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="66"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 36%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_36"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="36"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="64"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 38%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_38"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="38"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="62"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 40%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_40"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="40"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="60"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 42%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_42"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="42"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="58"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 44%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_44"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="44"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="56"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 46%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_46"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="46"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="54"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 48%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_48"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="48"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="52"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 50%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_50"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="50"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="50"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 52%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_52"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="52"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="48"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 54%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_54"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="54"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="46"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 56%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_56"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="56"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="44"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 58%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_58"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="58"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="42"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 60%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_60"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="60"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="40"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 62%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_62"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="62"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="38"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 64%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_64"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="64"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="36"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 66%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_66"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="66"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="34"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 68%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_68"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="68"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="32"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 70%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_70"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="70"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="30"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 72%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_72"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="72"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="28"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 74%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_74"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="74"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="26"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 76%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_76"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="76"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="24"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 78%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_78"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="78"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="22"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 80%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_80"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="80"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="20"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 82%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_82"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="82"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="18"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 84%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_84"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="84"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="16"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 86%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_86"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="86"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="14"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 88%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_88"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="88"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="12"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 90%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_90"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="90"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 92%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_92"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="92"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="8"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 94%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_94"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="94"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="6"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 96%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_96"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="96"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 98%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_98"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="98"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- route at 100%: solid up to the boat's centre, dashed after it -->
+            <LinearLayout
+                android:id="@+id/liveupdate_line_100"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="11dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="100"
+                    android:background="@drawable/liveupdate_route_solid" />
+                <ImageView android:layout_width="0dp" android:layout_height="2dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/liveupdate_route_dashed" />
+                <ImageView android:layout_width="36dp" android:layout_height="2dp"
+                    android:background="@drawable/liveupdate_route_dashed" />
+            </LinearLayout>
+
+            <!-- boat at 0% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_0"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="0" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="100" />
+            </LinearLayout>
+
+            <!-- boat at 2% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_2"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="2" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="98" />
+            </LinearLayout>
+
+            <!-- boat at 4% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_4"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="4" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="96" />
+            </LinearLayout>
+
+            <!-- boat at 6% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_6"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="6" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="94" />
+            </LinearLayout>
+
+            <!-- boat at 8% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_8"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="8" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="92" />
+            </LinearLayout>
+
+            <!-- boat at 10% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_10"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="10" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="90" />
+            </LinearLayout>
+
+            <!-- boat at 12% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_12"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="12" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="88" />
+            </LinearLayout>
+
+            <!-- boat at 14% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_14"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="14" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="86" />
+            </LinearLayout>
+
+            <!-- boat at 16% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_16"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="16" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="84" />
+            </LinearLayout>
+
+            <!-- boat at 18% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_18"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="18" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="82" />
+            </LinearLayout>
+
+            <!-- boat at 20% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_20"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="20" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="80" />
+            </LinearLayout>
+
+            <!-- boat at 22% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_22"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="22" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="78" />
+            </LinearLayout>
+
+            <!-- boat at 24% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_24"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="24" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="76" />
+            </LinearLayout>
+
+            <!-- boat at 26% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_26"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="26" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="74" />
+            </LinearLayout>
+
+            <!-- boat at 28% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_28"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="28" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="72" />
+            </LinearLayout>
+
+            <!-- boat at 30% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_30"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="30" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="70" />
+            </LinearLayout>
+
+            <!-- boat at 32% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_32"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="32" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="68" />
+            </LinearLayout>
+
+            <!-- boat at 34% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_34"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="34" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="66" />
+            </LinearLayout>
+
+            <!-- boat at 36% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_36"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="36" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="64" />
+            </LinearLayout>
+
+            <!-- boat at 38% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_38"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="38" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="62" />
+            </LinearLayout>
+
+            <!-- boat at 40% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_40"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="40" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="60" />
+            </LinearLayout>
+
+            <!-- boat at 42% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_42"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="42" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="58" />
+            </LinearLayout>
+
+            <!-- boat at 44% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_44"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="44" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="56" />
+            </LinearLayout>
+
+            <!-- boat at 46% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_46"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="46" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="54" />
+            </LinearLayout>
+
+            <!-- boat at 48% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_48"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="48" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="52" />
+            </LinearLayout>
+
+            <!-- boat at 50% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_50"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="50" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="50" />
+            </LinearLayout>
+
+            <!-- boat at 52% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_52"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="52" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="48" />
+            </LinearLayout>
+
+            <!-- boat at 54% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_54"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="54" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="46" />
+            </LinearLayout>
+
+            <!-- boat at 56% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_56"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="56" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="44" />
+            </LinearLayout>
+
+            <!-- boat at 58% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_58"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="58" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="42" />
+            </LinearLayout>
+
+            <!-- boat at 60% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_60"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="60" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="40" />
+            </LinearLayout>
+
+            <!-- boat at 62% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_62"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="62" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="38" />
+            </LinearLayout>
+
+            <!-- boat at 64% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_64"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="64" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="36" />
+            </LinearLayout>
+
+            <!-- boat at 66% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_66"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="66" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="34" />
+            </LinearLayout>
+
+            <!-- boat at 68% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_68"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="68" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="32" />
+            </LinearLayout>
+
+            <!-- boat at 70% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_70"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="70" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="30" />
+            </LinearLayout>
+
+            <!-- boat at 72% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_72"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="72" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="28" />
+            </LinearLayout>
+
+            <!-- boat at 74% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_74"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="74" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="26" />
+            </LinearLayout>
+
+            <!-- boat at 76% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_76"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="76" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="24" />
+            </LinearLayout>
+
+            <!-- boat at 78% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_78"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="78" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="22" />
+            </LinearLayout>
+
+            <!-- boat at 80% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_80"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="80" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="20" />
+            </LinearLayout>
+
+            <!-- boat at 82% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_82"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="82" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="18" />
+            </LinearLayout>
+
+            <!-- boat at 84% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_84"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="84" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="16" />
+            </LinearLayout>
+
+            <!-- boat at 86% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_86"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="86" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="14" />
+            </LinearLayout>
+
+            <!-- boat at 88% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_88"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="88" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="12" />
+            </LinearLayout>
+
+            <!-- boat at 90% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_90"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="90" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="10" />
+            </LinearLayout>
+
+            <!-- boat at 92% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_92"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="92" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="8" />
+            </LinearLayout>
+
+            <!-- boat at 94% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_94"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="94" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="6" />
+            </LinearLayout>
+
+            <!-- boat at 96% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_96"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="96" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+            <!-- boat at 98% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_98"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="98" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <!-- boat at 100% (centred on the route line) -->
+            <LinearLayout
+                android:id="@+id/liveupdate_boat_100"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="100" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sail_boat" />
+                <ImageView android:layout_width="0dp" android:layout_height="12dp"
+                    android:layout_weight="0" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/liveupdate_dep_label"
+                    style="@android:style/TextAppearance.Material.Notification.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/liveupdate_dep_time"
+                    style="@android:style/TextAppearance.Material.Notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/liveupdate_arr_label"
+                    style="@android:style/TextAppearance.Material.Notification.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/liveupdate_arr_time"
+                    style="@android:style/TextAppearance.Material.Notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.metrash.liveupdate.sample'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.metrash.liveupdate.sample'
+        minSdkVersion 25
+        targetSdkVersion 36
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+// Pass -PuseAar to test the built LiveUpdateNFILib.aar file exactly as VoltMX will consume it
+// (run :app:assembleRelease first). Default is the live :app project.
+def useAar = project.hasProperty('useAar')
+
+dependencies {
+    if (useAar) {
+        implementation files('../app/build/outputs/aar/LiveUpdateNFILib.aar')
+    } else {
+        implementation project(':app')
+    }
+    // The lib declares androidx.core as compileOnly, so the host app must supply it (VoltMX does)
+    implementation 'androidx.core:core:1.12.0'
+}
